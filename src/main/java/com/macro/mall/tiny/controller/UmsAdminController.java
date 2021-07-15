@@ -67,4 +67,13 @@ public class UmsAdminController {
 
         return CommonResult.success(permissionList);
     }
+
+    @ApiOperation("获取用户信息")
+    @RequestMapping(value = "/{adminId}", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<UmsAdmin> getInfo(@PathVariable Long adminId) {
+        UmsAdmin admin = adminService.getAdminByAdminId(adminId);
+
+        return CommonResult.success(admin);
+    }
 }

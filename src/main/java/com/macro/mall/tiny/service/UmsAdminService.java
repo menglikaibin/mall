@@ -14,6 +14,8 @@ public interface UmsAdminService {
      */
     UmsAdmin getAdminByUsername(String username);
 
+    UmsAdmin getAdminByAdminId(Long adminId);
+
     /**
      * 注册
      */

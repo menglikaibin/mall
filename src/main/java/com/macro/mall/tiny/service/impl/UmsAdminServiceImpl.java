@@ -60,6 +60,11 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     }
 
     @Override
+    public UmsAdmin getAdminByAdminId(Long adminId) {
+        return adminMapper.selectByPrimaryKey(adminId);
+    }
+
+    @Override
     public String login(String username, String password) {
         String token = null;
         try {
