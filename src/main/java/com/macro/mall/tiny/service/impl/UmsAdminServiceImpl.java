@@ -1,6 +1,8 @@
 package com.macro.mall.tiny.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.macro.mall.tiny.common.utils.JwtTokenUtil;
+import com.macro.mall.tiny.dao.UmsAdminDao;
 import com.macro.mall.tiny.dao.UmsAdminRoleRelationDao;
 import com.macro.mall.tiny.mbg.mapper.UmsAdminMapper;
 import com.macro.mall.tiny.mbg.model.UmsAdmin;
@@ -22,6 +24,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
 
@@ -41,11 +44,14 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     @Value("${jwt.tokenHead}")
     private String tokenHead;
 
-    @Autowired
+    @Resource
     private UmsAdminMapper adminMapper;
 
-    @Autowired
+    @Resource
     private UmsAdminRoleRelationDao umsAdminRoleRelationDao;
+
+    @Resource
+    private UmsAdminDao umsAdminDao;
 
     @Override
     public UmsAdmin getAdminByUsername(String username) {
@@ -107,5 +113,14 @@ public class UmsAdminServiceImpl implements UmsAdminService {
     @Override
     public List<UmsPermission> getPermissionList(Long adminId) {
         return umsAdminRoleRelationDao.getPermissionList(adminId);
+    }
+
+    @Override
+    public List<UmsAdmin> getAdmins() {
+        return umsAdminDao.selectList(
+                new QueryWrapper<UmsAdmin>()
+                .lambda()
+                .ge(UmsAdmin::getId, 0)
+        );
     }
 }

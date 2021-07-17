@@ -30,4 +30,9 @@ public interface UmsAdminService {
      * 获取用户所有权限
      */
     List<UmsPermission> getPermissionList(Long adminId);
+
+    /**
+     * 获取用户列表
+     */
+    List<UmsAdmin> getAdmins();
 }

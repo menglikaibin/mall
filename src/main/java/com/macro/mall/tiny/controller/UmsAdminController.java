@@ -76,4 +76,13 @@ public class UmsAdminController {
 
         return CommonResult.success(admin);
     }
+
+    @ApiOperation("获取用户列表")
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @ResponseBody
+    public CommonResult<List<UmsAdmin>> getAdmin() {
+        List<UmsAdmin> admins = adminService.getAdmins();
+
+        return CommonResult.success(admins);
+    }
 }
