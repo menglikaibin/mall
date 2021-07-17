@@ -1,6 +1,10 @@
 package com.macro.mall.tiny.service.impl;
 
+import com.macro.mall.tiny.entity.product.ProductBrand;
+import com.macro.mall.tiny.entity.product.ShowProduct;
+import com.macro.mall.tiny.mbg.mapper.PmsBrandMapper;
 import com.macro.mall.tiny.mbg.mapper.PmsProductMapper;
+import com.macro.mall.tiny.mbg.model.PmsBrand;
 import com.macro.mall.tiny.mbg.model.PmsProduct;
 import com.macro.mall.tiny.service.ProductService;
 import org.springframework.stereotype.Service;
@@ -12,6 +16,9 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
     @Resource
     private PmsProductMapper productMapper;
+
+    @Resource
+    private PmsBrandMapper brandMapper;
 
     @Override
     public int createProduct(PmsProduct product) {
@@ -34,7 +41,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public PmsProduct show(Long id) {
-        return productMapper.selectByPrimaryKey(id);
+    public ShowProduct show(Long id) {
+        ShowProduct product = new ShowProduct();
+
+        PmsProduct pmsProduct = productMapper.selectByPrimaryKey(id);
+        PmsBrand pmsBrand = brandMapper.selectByPrimaryKey(pmsProduct.getBrandId());
+
+        ProductBrand productBrand = new ProductBrand();
+        productBrand.setId(pmsBrand.getId());
+        productBrand.setName(pmsBrand.getName());
+
+
+        product.setId(pmsProduct.getId());
+        product.setName(pmsProduct.getName());
+        product.setBrand(productBrand);
+        return product;
     }
 }

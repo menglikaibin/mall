@@ -1,6 +1,7 @@
 package com.macro.mall.tiny.controller;
 
 import com.macro.mall.tiny.common.api.CommonResult;
+import com.macro.mall.tiny.entity.product.ShowProduct;
 import com.macro.mall.tiny.mbg.model.PmsProduct;
 import com.macro.mall.tiny.service.ProductService;
 import io.swagger.annotations.Api;
@@ -40,8 +41,8 @@ public class ProductController {
     @ApiOperation("品牌详情")
     @RequestMapping(value = "/show/{id}", method = RequestMethod.POST)
     @ResponseBody
-    public CommonResult<PmsProduct> show(@PathVariable Long id) {
-        PmsProduct product;
+    public CommonResult<ShowProduct> show(@PathVariable Long id) {
+        ShowProduct product;
 
         product = productService.show(id);
 

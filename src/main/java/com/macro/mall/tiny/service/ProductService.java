@@ -1,5 +1,7 @@
 package com.macro.mall.tiny.service;
 
+import com.macro.mall.tiny.entity.product.ProductBrand;
+import com.macro.mall.tiny.entity.product.ShowProduct;
 import com.macro.mall.tiny.mbg.model.PmsProduct;
 
 import java.util.List;
@@ -16,5 +18,5 @@ public interface ProductService {
 
     List<PmsProduct> listBrand(int page, int perPage);
 
-    PmsProduct show(Long id);
+    ShowProduct show(Long id);
 }
