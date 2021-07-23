@@ -29,16 +29,16 @@ public class ProductController {
         int count = productService.createProduct(product);
         if (count == 1) {
             commonResult = CommonResult.success(product);
-            LOGGER.debug("品牌创建成功: {}", product);
+            LOGGER.debug("商品创建成功: {}", product);
         } else {
             commonResult = CommonResult.failed("操作失败");
-            LOGGER.debug("品牌创建失败: {}", product);
+            LOGGER.debug("商品创建失败: {}", product);
         }
 
         return commonResult;
     }
 
-    @ApiOperation("品牌详情")
+    @ApiOperation("商品详情")
     @RequestMapping(value = "/show/{id}", method = RequestMethod.POST)
     @ResponseBody
     public CommonResult<ShowProduct> show(@PathVariable Long id) {
